@@ -3,27 +3,42 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- IMPORTANT: Mobile responsiveness -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Mobile viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>My Love ❤️</title>
 
 <style>
 
-/* ===== GOOGLE FONT ===== */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400&display=swap');
+/* ===== RESET ===== */
+* {
+    box-sizing: border-box;
+}
 
-/* ===== BODY ===== */
-body {
+/* ===== FIXED FULL SCREEN ===== */
+html, body {
     margin: 0;
-    min-height: 100vh;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* prevents scrolling */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== BACKGROUND ===== */
+body {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
+
     background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffdde1);
-    overflow: hidden;
-    padding: 15px;
 }
 
 /* ===== FLOATING HEARTS ===== */
@@ -47,91 +62,147 @@ body::after {
 }
 
 /* ===== CARD ===== */
+/* ===== CARD (MOBILE PERFECT CENTER) ===== */
 .card {
-    background: rgba(255,255,255,0.9);
-    padding: 25px 20px;
-    border-radius: 20px;
+
+    position: relative;
+  height: 70vh;
+    width: 92%;
+    max-width: 380px;
+
+    min-height: 60vh; /* covers more vertical space */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical center */
+    align-items: center;     /* horizontal center */
+
+    background: rgba(255,255,255,0.92);
+
+    padding: 28px 22px;
+
+    border-radius: 22px;
+
     text-align: center;
 
-    /* Responsive width */
-    width: 90%;
-    max-width: 350px;
+    box-shadow: 0 0 30px rgba(255,105,135,0.5);
 
-    box-shadow: 0 0 25px rgba(255,105,135,0.4);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+
     animation: fadeIn 1.5s ease;
 }
 
+
 /* ===== HEART ===== */
 .heart {
-    font-size: 42px;
+
+    font-size: 45px;
+
     animation: heartbeat 1.5s infinite;
+
+    cursor: pointer;
 }
 
-/* ===== HEADING ===== */
+/* ===== TITLE ===== */
 h1 {
+
     font-family: 'Dancing Script', cursive;
+
     font-size: clamp(28px, 6vw, 36px);
+
     color: #d6336c;
+
     margin: 10px 0;
 }
 
-/* ===== MESSAGE ===== */
+/* ===== TEXT ===== */
 p {
+
     font-size: clamp(15px, 4vw, 17px);
+
     color: #444;
+
     line-height: 1.6;
 }
 
 /* ===== BUTTON ===== */
 button {
+
     margin-top: 15px;
+
     padding: 12px 25px;
+
     border: none;
+
     border-radius: 30px;
+
     background: linear-gradient(45deg, #ff4d6d, #ff758c);
+
     color: white;
-    font-size: clamp(14px, 4vw, 16px);
+
+    font-size: 16px;
+
     cursor: pointer;
+
     box-shadow: 0 0 15px rgba(255,77,109,0.6);
 }
 
 /* ===== LOVE MESSAGE ===== */
 #loveMessage {
+
     display: none;
+
     margin-top: 15px;
+
     font-family: 'Dancing Script', cursive;
+
     font-size: clamp(22px, 6vw, 26px);
+
     color: #c9184a;
+
+    animation: fadeIn 2s ease;
 }
 
-/* ===== ANIMATION ===== */
+/* ===== ANIMATIONS ===== */
 @keyframes heartbeat {
+
     0%,100% { transform: scale(1); }
+
     50% { transform: scale(1.2); }
 }
 
 @keyframes fadeIn {
+
     from {
+
         opacity: 0;
+
         transform: translateY(20px);
     }
+
     to {
+
         opacity: 1;
+
         transform: translateY(0);
     }
 }
 
 </style>
+
+<!-- Romantic font -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<!-- MUSIC -->
+<!-- ===== MUSIC ===== -->
 <audio id="bgMusic" autoplay loop muted playsinline>
     <source src="music/song.mp3" type="audio/mpeg">
 </audio>
 
+<!-- ===== CARD ===== -->
 <div class="card">
 
     <div class="heart" onclick="startMusic()">❤️</div>
@@ -139,39 +210,48 @@ button {
     <h1>Thango pulla💋</h1>
 
     <p>
-      என் சாமி நீ தானடா💕💌<br>
-      என் சாவி நீ தானடா😘💞<br>
-      என் சாபம் நீ தானடா😜💋<br>
-      என் சாந்தி நீ தானடா😭🤌
+        என் சாமி நீ தானடா💕💌<br>
+        என் சாவி நீ தானடா😘💞<br>
+        என் சாபம் நீ தானடா😜💋<br>
+        என் சாந்தி நீ தானடா😭🤌
     </p>
 
     <button onclick="showLove()">Touch My Heart 💖</button>
 
     <div id="loveMessage">
-        I Love You So Much💌
+        I Love You So Much 💌
     </div>
 
 </div>
 
 <script>
 
+// music autoplay fix
 const music = document.getElementById("bgMusic");
 
-// autoplay attempt
 window.addEventListener("DOMContentLoaded", () => {
+
     music.play();
+
     setTimeout(() => {
+
         music.muted = false;
+
     }, 800);
+
 });
 
-// backup click start
+// heart click backup
 function startMusic() {
+
     music.muted = false;
+
     music.play();
 }
 
+// show love message
 function showLove() {
+
     document.getElementById("loveMessage").style.display = "block";
 }
 

@@ -2,23 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> My Love ❤️</title>
+
+<!-- IMPORTANT: Mobile responsiveness -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Love ❤️</title>
 
 <style>
 
-/* ===== GOOGLE FONT STYLE ===== */
+/* ===== GOOGLE FONT ===== */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400&display=swap');
 
 /* ===== BODY ===== */
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffdde1);
     overflow: hidden;
+    padding: 15px;
 }
 
 /* ===== FLOATING HEARTS ===== */
@@ -27,96 +32,89 @@ body::before, body::after {
     position: absolute;
     width: 100%;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     opacity: 0.3;
-    animation: float 10s linear infinite;
+    animation: float 12s linear infinite;
 }
 
 body::after {
-    animation-delay: 5s;
+    animation-delay: 6s;
 }
 
 @keyframes float {
-    0% { transform: translateY(100vh); }
-    100% { transform: translateY(-10vh); }
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
 }
 
 /* ===== CARD ===== */
 .card {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 40px 30px;
-    border-radius: 25px;
+    background: rgba(255,255,255,0.9);
+    padding: 25px 20px;
+    border-radius: 20px;
     text-align: center;
-    width: 320px;
-    box-shadow: 0 0 25px rgba(255, 105, 135, 0.4);
+
+    /* Responsive width */
+    width: 90%;
+    max-width: 350px;
+
+    box-shadow: 0 0 25px rgba(255,105,135,0.4);
     backdrop-filter: blur(10px);
-    animation: fadeIn 2s ease;
+    animation: fadeIn 1.5s ease;
 }
 
-/* ===== HEART ICON ===== */
+/* ===== HEART ===== */
 .heart {
-    font-size: 50px;
+    font-size: 42px;
     animation: heartbeat 1.5s infinite;
 }
 
 /* ===== HEADING ===== */
 h1 {
     font-family: 'Dancing Script', cursive;
-    font-size: 38px;
+    font-size: clamp(28px, 6vw, 36px);
     color: #d6336c;
     margin: 10px 0;
 }
 
 /* ===== MESSAGE ===== */
 p {
-    color: #555;
-    font-size: 17px;
+    font-size: clamp(15px, 4vw, 17px);
+    color: #444;
     line-height: 1.6;
 }
 
 /* ===== BUTTON ===== */
 button {
-    margin-top: 20px;
-    padding: 12px 28px;
+    margin-top: 15px;
+    padding: 12px 25px;
     border: none;
     border-radius: 30px;
     background: linear-gradient(45deg, #ff4d6d, #ff758c);
     color: white;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
+    font-size: clamp(14px, 4vw, 16px);
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
-    transition: 0.3s;
-}
-
-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255, 77, 109, 0.9);
+    box-shadow: 0 0 15px rgba(255,77,109,0.6);
 }
 
 /* ===== LOVE MESSAGE ===== */
 #loveMessage {
     display: none;
-    margin-top: 20px;
+    margin-top: 15px;
     font-family: 'Dancing Script', cursive;
-    font-size: 26px;
+    font-size: clamp(22px, 6vw, 26px);
     color: #c9184a;
-    animation: fadeIn 2s ease;
 }
 
-/* ===== ANIMATIONS ===== */
+/* ===== ANIMATION ===== */
 @keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.2); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -129,42 +127,14 @@ button:hover {
 
 <body>
 
-<!-- ===== BACKGROUND MUSIC ===== -->
+<!-- MUSIC -->
 <audio id="bgMusic" autoplay loop muted playsinline>
     <source src="music/song.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-const music = document.getElementById("bgMusic");
-
-// Force autoplay on page open
-window.addEventListener("DOMContentLoaded", () => {
-
-    // Start playing muted (allowed by browser)
-    music.muted = true;
-    music.play();
-
-    // Unmute after short delay
-    setTimeout(() => {
-        music.muted = false;
-    }, 800);
-
-});
-
-// Backup: start music on any click anywhere
-document.addEventListener("click", () => {
-    music.muted = false;
-    music.play();
-}, { once: true });
-
-</script>
-
-
-
-
 <div class="card">
 
-    <div class="heart">❤️</div>
+    <div class="heart" onclick="startMusic()">❤️</div>
 
     <h1>Thango pulla💋</h1>
 
@@ -172,25 +142,39 @@ document.addEventListener("click", () => {
       என் சாமி நீ தானடா💕💌<br>
       என் சாவி நீ தானடா😘💞<br>
       என் சாபம் நீ தானடா😜💋<br>
-      என் சாந்தி நீ தானடா😭🤌<br>
+      என் சாந்தி நீ தானடா😭🤌
     </p>
 
     <button onclick="showLove()">Touch My Heart 💖</button>
 
     <div id="loveMessage">
-        I Love You So Much Thangoo...
+        I Love You So Much💌
     </div>
 
 </div>
 
 <script>
-function showLove() {
 
-    document.getElementById("loveMessage").style.display = "block";
+const music = document.getElementById("bgMusic");
 
-    // Play music when button clicked
-   
+// autoplay attempt
+window.addEventListener("DOMContentLoaded", () => {
+    music.play();
+    setTimeout(() => {
+        music.muted = false;
+    }, 800);
+});
+
+// backup click start
+function startMusic() {
+    music.muted = false;
+    music.play();
 }
+
+function showLove() {
+    document.getElementById("loveMessage").style.display = "block";
+}
+
 </script>
 
 </body>

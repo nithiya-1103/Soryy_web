@@ -198,7 +198,8 @@ button {
 <body>
 
 <!-- ===== MUSIC ===== -->
-<audio id="bgMusic" autoplay loop muted playsinline>
+<audio id="bgMusic" loop playsinline>
+
     <source src="music/song.mp3" type="audio/mpeg">
 </audio>
 
@@ -226,27 +227,20 @@ button {
 
 <script>
 
-// music autoplay fix
 const music = document.getElementById("bgMusic");
 
-window.addEventListener("DOMContentLoaded", () => {
+// Start music on ANY user touch
+document.body.addEventListener("click", startMusic, { once: true });
 
-    music.play();
-
-    setTimeout(() => {
-
-        music.muted = false;
-
-    }, 800);
-
-});
-
-// heart click backup
 function startMusic() {
 
     music.muted = false;
 
-    music.play();
+    music.play().then(() => {
+        console.log("Music started");
+    }).catch(err => {
+        console.log("Play failed:", err);
+    });
 }
 
 // show love message
@@ -256,6 +250,7 @@ function showLove() {
 }
 
 </script>
+
 
 </body>
 </html>

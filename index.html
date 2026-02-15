@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Mobile viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>My Love ❤️</title>
@@ -15,26 +14,23 @@
     box-sizing: border-box;
 }
 
-/* ===== FIXED FULL SCREEN ===== */
+/* ===== FULL SCREEN ===== */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* prevents scrolling */
+    overflow: hidden;
     font-family: 'Poppins', sans-serif;
 }
 
 /* ===== BACKGROUND ===== */
 body {
     position: fixed;
-
     inset: 0;
-
     width: 100vw;
     height: 100vh;
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 
@@ -62,20 +58,19 @@ body::after {
 }
 
 /* ===== CARD ===== */
-/* ===== CARD (MOBILE PERFECT CENTER) ===== */
 .card {
 
     position: relative;
-  height: 70vh;
+
     width: 92%;
     max-width: 380px;
 
-    min-height: 60vh; /* covers more vertical space */
+    height: 70vh;
 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* vertical center */
-    align-items: center;     /* horizontal center */
+    justify-content: center;
+    align-items: center;
 
     background: rgba(255,255,255,0.92);
 
@@ -92,36 +87,25 @@ body::after {
     animation: fadeIn 1.5s ease;
 }
 
-
 /* ===== HEART ===== */
 .heart {
-
     font-size: 45px;
-
     animation: heartbeat 1.5s infinite;
-
     cursor: pointer;
 }
 
 /* ===== TITLE ===== */
 h1 {
-
     font-family: 'Dancing Script', cursive;
-
     font-size: clamp(28px, 6vw, 36px);
-
     color: #d6336c;
-
     margin: 10px 0;
 }
 
 /* ===== TEXT ===== */
 p {
-
     font-size: clamp(15px, 4vw, 17px);
-
     color: #444;
-
     line-height: 1.6;
 }
 
@@ -165,32 +149,23 @@ button {
 
 /* ===== ANIMATIONS ===== */
 @keyframes heartbeat {
-
     0%,100% { transform: scale(1); }
-
     50% { transform: scale(1.2); }
 }
 
 @keyframes fadeIn {
-
     from {
-
         opacity: 0;
-
         transform: translateY(20px);
     }
-
     to {
-
         opacity: 1;
-
         transform: translateY(0);
     }
 }
 
 </style>
 
-<!-- Romantic font -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
 </head>
@@ -198,8 +173,7 @@ button {
 <body>
 
 <!-- ===== MUSIC ===== -->
-<audio id="bgMusic" loop playsinline>
-
+<audio id="bgMusic" loop playsinline preload="auto">
     <source src="music/song.mp3" type="audio/mpeg">
 </audio>
 
@@ -220,7 +194,7 @@ button {
     <button onclick="showLove()">Touch My Heart 💖</button>
 
     <div id="loveMessage">
-        I Love You So Much 💌
+        I Love You So Much Thangoo..
     </div>
 
 </div>
@@ -229,28 +203,33 @@ button {
 
 const music = document.getElementById("bgMusic");
 
-// Start music on ANY user touch
-document.body.addEventListener("click", startMusic, { once: true });
+let started = false;
 
+// works on mobile
 function startMusic() {
 
-    music.muted = false;
+    if (started) return;
 
-    music.play().then(() => {
-        console.log("Music started");
-    }).catch(err => {
-        console.log("Play failed:", err);
+    music.play()
+    .then(() => {
+        started = true;
+        console.log("Music playing");
+    })
+    .catch(() => {
+        console.log("Tap again");
     });
+
 }
 
-// show love message
-function showLove() {
+// play on ANY screen tap (mobile fix)
+document.addEventListener("click", startMusic);
 
+// show message
+function showLove() {
     document.getElementById("loveMessage").style.display = "block";
 }
 
 </script>
-
 
 </body>
 </html>
